@@ -1,0 +1,34 @@
+camera:
+  acquisition_rate: 19.0
+  exposure_time: 10000
+  gain: 23.0
+  width: 5472
+  height: 3648
+  camera_matrix: [5018.847427, 0.000000, 2945.637471,
+                  0.000000, 5001.932889, 1964.108520,
+                  0.000000, 0.000000, 1.000000]
+  dist_coeffs: [-0.060205, 0.116970, -0.000497, 0.001010, 0.000000]
+  display_fps: true
+  recording_workers_num: 2
+  recording_save_root_dir: /home/siyu/rm/data/mnt/ssd
+  
+
+
+lidar: 
+  extrinsics: [-0.0213372,-0.999763,0.00432506,-0.0265137,
+             -0.0189207,-0.00392146,-0.999813,-0.0349505,
+              0.999593,-0.0214151,-0.0188325,-0.0142249,
+              0.0,0.0,0.0,1.0]
+  max_frames: 100
+  max_points_per_frame: 10000
+
+
+
+
+
+
+
+
+
+
+  

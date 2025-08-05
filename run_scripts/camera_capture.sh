@@ -1,0 +1,1 @@
+cd /opt/MVS/bin/ && sh ./MVS.sh

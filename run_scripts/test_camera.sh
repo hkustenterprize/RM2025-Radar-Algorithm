@@ -1,0 +1,1 @@
+python -m driver.hik_camera.hik --config config/device.yaml

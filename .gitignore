@@ -1,0 +1,29 @@
+*.npy
+*.stp
+# *.png
+*.ply
+*.PLY
+*.pcd
+*.pyc
+*.jpg
+__pycache__
+.vscode
+*.onnx
+*.pt
+*.ckpt
+*.pth
+*.mp4
+*.avi
+*.engine
+*.bin
+*.pkl
+*.ply
+*.zip
+/data
+/training_workspace
+
+# except for the following files
+!/field/RMUC2025_2.PLY
+!/field/RMUC2025_National.PLY
+!/interface/calib_tutorial.jpg
+!/docs/QQ.jpg

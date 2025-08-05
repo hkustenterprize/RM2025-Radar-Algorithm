@@ -1,0 +1,84 @@
+car_detector:
+  weights_path: "weights/car_v1.5.engine"
+  img_size: 1280
+  conf_thres: 0.2
+  iou_thres: 0.5
+  max_det: 10
+  tracker_config_path: "config/botsort.yaml"
+  
+
+armor_detector:
+  class_names: ["B1", "B2", "B3", "B4", "B7", "R1", "R2", "R3", "R4", "R7", "G1", "G2", "G3", "G4", "G7"]
+  use_enhanced_detector: true
+  armor_detector_type: "two_step" # three_step, three_step
+
+  ##### Weights and size configuration for three step detector
+  # weights_path: "weights/armor_pfa_dynamic.engine"
+  # img_size: [640, 640]
+  
+  ##### Weights and size configuration for two step detector
+  weights_path: "weights/armor_v0.7.engine"
+  img_size: 192
+  
+  ##### Weights and size configuration END
+
+  ##### Post processing configuration for yolo-based detector
+  conf_thres: 0.3
+  iou_thres: 0.4
+  max_det: 1
+  digit_model_type: "mobilenet"
+  digit_weights_path: "weights/MobileNet_v3.1.pth"
+
+tracker:
+  type: "CascadeMatchTracker"
+  point_guesser_config_path: "config/guess_pts.yaml"
+
+device: "cuda"
+transform:
+  # For mimic
+  # K: [[2500.0, 0.0, 1536.0], [0.0, 2500.0, 1024.0], [0.0, 0.0, 1.0]]
+  # dist_coeffs: [0.0, 0.0, 0.0, 0.0, 0.0]
+  # For real time
+  K: [[5033.780199, 0.000000, 2829.234535],
+      [0.000000, 5036.139955, 1929.489557],
+      [0.000000, 0.000000, 1.000000]]
+  dist_coeffs: [-0.061883, 0.104794, 0.000434, -0.000036, 0.000000]
+
+  R: [[0.99530147, -0.03039188, -0.09193101],
+      [-0.01339114, -0.98354371, 0.18017339],
+      [-0.09589397, -0.17809578, -0.97932948],]
+  t: [[-0.68605672], [1.13893625], [15.32698638]]
+  verbose: true
+
+field:
+  mesh_path: "field/RMUC2025_National.PLY"
+  # mesh_path: "field/RMUC2025_2.PLY"
+  keypoints: "transform/keypoint_6.txt"
+  # keypoints: "transform/keypoint_6_region.txt"
+  
+
+matcher:
+  iou_thres: 0.5
+  
+referee:
+  port: "/dev/ttyCH341USB0"
+  # port: "/dev/pts/9"
+  baudrate: 115200
+
+debug:
+  inference_video: true
+  video_source: /home/siyu/Documents/RM2025-Radar-Algorithm/video/7.14-BO2-ICMA-all.mp4
+  streaming_video: false
+
+
+  
+
+
+
+
+
+
+
+
+
+
