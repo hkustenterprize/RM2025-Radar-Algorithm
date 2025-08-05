@@ -131,8 +131,19 @@ chmod +x run_scripts/*.sh
 ```
 注意：可在```config/params.yaml```文件中选择使用导入视频（```inference_video```）或者实时相机数据（```streaming_video```）
 
+## 效果展示
+![青工会](docs/QGH.jpg)
+*青工会展示上榜，效果拔群*
+
 ## 联系方式
-欢迎大家加入ENTERPRIZE开源交流群提问，获取更多有关机械，硬件等的开源信息🎉🎉🎉
+非常感谢各位对香港科技大学 ENTERPRIZE 战队开源项目的关注与支持，欢迎通过以下方式联系我们, 强烈推荐加入官方开源交流QQ群，获取更多有关机械，硬件，嵌入式与算法的开源信息：
+- 作者邮箱: zguobd@connect.ust.hk / szhoubx@connect.ust.hk
+- 作者微信: guozilin200429 / s9647814
+- 香港科技大学ENTERPRIZE战队开源交流QQ群: 581184202  
+- 战队微信公众号: HKUST ENTERPRIZE (ID: gh_855d709c046e)
+- 战队Bilibili官号: 港科大ENTERPRIZE战队 (UID: 634988052)
+
+若您在机器人设计过程中受益于我们的项目，恳请在开源引用中注明我们的项目来源,  同时希望能够star⭐⭐我们Github项目❤️❤️。你们的支持是我们不断前行的动力。让我们携手共建一个鼓励创新、协作与超越的 RM 开源生态。🎉🎉🎉
 
 <p align="center">
   <img src="./docs/QQ.jpg" width="300"/>
