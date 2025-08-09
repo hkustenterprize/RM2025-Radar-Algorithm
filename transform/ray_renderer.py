@@ -1,10 +1,8 @@
-from params import *
 import numpy as np
 import open3d as o3d
 import tkinter as tk
 from PIL import Image, ImageTk
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import cv2
 import time
 
@@ -440,6 +438,6 @@ if __name__ == "__main__":
     )
     # 创建交互界面
     root = tk.Tk()
-    app = PixelToWorldGUI(root, "test_assets/calib/0.jpg", converter, scale_factor=0.5)
+    app = PixelToWorldGUI(root, config["transform"]["demo_img_path"], converter, scale_factor=0.5)
     plt.ion()  # 开启Matplotlib交互模式
     root.mainloop()

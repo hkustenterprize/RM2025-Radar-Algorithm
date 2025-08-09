@@ -12,7 +12,10 @@
 - `2025.8.9`: 
   
   - 删除掉无用的config文件(`config/armor.yaml`,`config/car.yaml`)
-  - 我们开源了`Car Detector`以及`Armor Detector`相关数据集, 以供大家学习交流分享🎉🎉🎉
+  - 加入参考*Ultralytics*的训练配置文件: `./config/armor_training_config.yaml` `./config/car_training_config.yaml`
+  - 我们开源了`Car Detector`,`Armor Detector`以及`Pattern Classifier`相关数据集, 以供大家学习交流分享🎉🎉🎉
+  - 我们更新了装甲板分类器的训练代码以及指南
+  - Release了*射线投影(ray-cast)*的可视化交互式脚本以及使用指南 
 
 
 ## 开源协议
@@ -23,6 +26,8 @@
 ## 项目概述
 
 雷达站作为RoboMaster比赛中的关键辅助兵种，需要在复杂赛场环境中稳定追踪双方机器人的运动状态。本系统通过创新的算法设计，解决了传统方案在遮挡处理、非平面场地定位、身份持续追踪等方面的痛点，在2025赛季复活赛中表现优异，助力战队取得单局最高1912.1s易伤时间、局均1618.3s易伤时间和420.2额外伤害的成绩。
+
+- *(![25赛季雷达站开源报告](docs/HKUST_ENTERPRIZE_RM2025_Radar开源报告.pdf) 如果你对我们的实现原理感兴趣, 请参考我们的官方技术报告来了解详细技术细节)*
 
 **核心功能**：
 - 高精度机器人检测（支持遮挡、低光照等复杂场景）
@@ -79,6 +84,16 @@
 | 多层透视变换 | 支持简单分层场地 | 层间交界模糊，需大量标定 |
 | 本方案射线投射 | 精准适配3D场地，无需分层 | 依赖精确场地模型 |
 
+#### 射线投影可视化demo
+**Pre-requisite**
+```shell
+pip install open3d 
+```
+1. ❗❗找到![config/params.yaml](config/params.yaml), 根据指示将实际上场相机参数(transform.K, transform.dist_coffs)替换为demo用参数
+2. 运行代码 `python -m transform.ray_renderer`
+3. 根据指示, 在图片界面左键发射一条光线, 右键绘制轨迹, 实际投影呈现的效果会显示在3D图示中
+
+![脚本运行呈现](docs/raycast_demo.png)
 
 ### 4. 匈牙利匹配追踪算法
 
@@ -137,14 +152,15 @@
 
 #### Armor Detector:
 - 使用Ultralytics的训练接口
-- 训练config参考: (to be released)
+- 训练config参考: `./config/armor_training_config.yaml`
 
 
 #### MobileNET-v2
+训练代码
 ```python
 python -m model.digit_classifier.train --dataset-path /path/to/your/dataset --batch-size 32
 ```
-其中数据集格式要求为
+*其中数据集格式要求为*
 ``` shell
 /dataset
   /train
@@ -167,8 +183,7 @@ python -m model.digit_classifier.train --dataset-path /path/to/your/dataset --ba
     ...
   
 ```
-
-*请手动修改`model/digit_classifier/train`中的数据集目录, 目前没有做很严谨的适配, 敬请原谅*
+*由于不知道读者具体训练需求, train-val split留给读者自定义处理*
 
 ### 将训练得到的YOLO模型转化为TensorRT
 ```python

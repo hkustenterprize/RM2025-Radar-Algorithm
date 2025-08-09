@@ -26,5 +26,8 @@ __pycache__
 !/field/RMUC2025_2.PLY
 !/field/RMUC2025_National.PLY
 !/interface/calib_tutorial.jpg
-!/docs/QQ.jpg
-!/docs/QGH.jpg
+!/docs/*.jpg
+!/docs/*.png
+!/tracker/warmup_image.jpg
+!/demo/*.jpg
+!/demo/*.png

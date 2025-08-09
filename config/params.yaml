@@ -1,10 +1,10 @@
 car_detector:
-  weights_path: "weights/car_v1.5.engine"
+  weights_path: "weights/car_v1.5.engine" # Path to the car detection model weights
   img_size: 1280
   conf_thres: 0.2
   iou_thres: 0.5
   max_det: 10
-  tracker_config_path: "config/botsort.yaml"
+  tracker_config_path: "config/botsort.yaml" # Path to the tracker configuration file
   
 
 armor_detector:
@@ -17,7 +17,7 @@ armor_detector:
   # img_size: [640, 640]
   
   ##### Weights and size configuration for two step detector
-  weights_path: "weights/armor_v0.7.engine"
+  weights_path: "weights/armor_v0.7.engine" 
   img_size: 192
   
   ##### Weights and size configuration END
@@ -35,40 +35,42 @@ tracker:
 
 device: "cuda"
 transform:
-  # For mimic
+  # 以下是demo射线投影所用的相机参数
+  # 如果你要跑射线投影的demo,请务必修改以下参数为你的相机参数
   # K: [[2500.0, 0.0, 1536.0], [0.0, 2500.0, 1024.0], [0.0, 0.0, 1.0]]
   # dist_coeffs: [0.0, 0.0, 0.0, 0.0, 0.0]
-  # For real time
+
+  # 以下是ENTERPRIZE 2025赛季雷达站的实际相机参数
+  # 如果你要使用ENTERPRIZE开源的第视角视频,请务必修改以下参数为你的相机参数
   K: [[5033.780199, 0.000000, 2829.234535],
       [0.000000, 5036.139955, 1929.489557],
       [0.000000, 0.000000, 1.000000]]
   dist_coeffs: [-0.061883, 0.104794, 0.000434, -0.000036, 0.000000]
+  verbose: true
 
+  ## The below parameters are only used for mimic or demostration purposes
   R: [[0.99530147, -0.03039188, -0.09193101],
       [-0.01339114, -0.98354371, 0.18017339],
       [-0.09589397, -0.17809578, -0.97932948],]
   t: [[-0.68605672], [1.13893625], [15.32698638]]
-  verbose: true
+  demo_img_path: "demo/demo1.jpg"
+
 
 field:
-  mesh_path: "field/RMUC2025_National.PLY"
-  # mesh_path: "field/RMUC2025_2.PLY"
-  keypoints: "transform/keypoint_6.txt"
-  # keypoints: "transform/keypoint_6_region.txt"
-  
-
-matcher:
-  iou_thres: 0.5
+  mesh_path: "field/RMUC2025_National.PLY"       ## 全国赛场地文件
+  # mesh_path: "field/RMUC2025_Regional.PLY"     ## 区域赛场地文件
+  keypoints: "transform/keypoint_6.txt"          ## 全国赛场地关键点文件
+  # keypoints: "transform/keypoint_6_region.txt" ## 区域赛场地关键点文件
   
 referee:
-  port: "/dev/ttyCH341USB0"
+  port: "/dev/ttyCH341USB0"   ## 串口第一默认写入文件
   # port: "/dev/pts/9"
-  baudrate: 115200
+  baudrate: 115200            ## 串口波特率
 
 debug:
-  inference_video: true
-  video_source: /home/siyu/Documents/RM2025-Radar-Algorithm/video/7.14-BO2-ICMA-all.mp4
-  streaming_video: false
+  inference_video: true                   # 是否启用视频推理
+  video_source: "path/to/your/video.mp4"  # 视频源路径
+  streaming_video: false                  # 是否录制视频
 
 
   
