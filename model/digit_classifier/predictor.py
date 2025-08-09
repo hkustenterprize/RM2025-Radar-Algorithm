@@ -129,9 +129,9 @@ if __name__ == "__main__":
 
     # 配置
     model_type = "mobilenet"  # 修改为字符串
-    weights_path = "weights/MOBILENET_best_save0.pth"
+    weights_path = "/localdata/szhoubx/rm/RM2025-Radar-Tracking/training_workspace/training_20250721_225917/models/MobileNet_v3.0.pth"
     dataset_path = Path(
-        "/home/fallengold/extra/pure_armor_dataset/pytorch_split/val"
+        "/localdata/szhoubx/rm/data/pytorch_split/val"
     )  # 验证集路径
 
     # 初始化分类器
@@ -141,7 +141,7 @@ if __name__ == "__main__":
     def sample_images_from_dataset(dataset_path, num_samples=12):
         """从数据集中随机采样图像"""
         all_images = []
-        class_names = ["B1", "B2", "B3", "B4", "BS", "R1", "R2", "R3", "R4", "RS"]
+        class_names = ["B1", "B2", "B3", "B4", "BS","B0", "R1", "R2", "R3", "R4", "RS", "R0"]
 
         for class_name in class_names:
             class_dir = dataset_path / class_name
@@ -161,6 +161,8 @@ if __name__ == "__main__":
                         true_class = "4"
                     elif class_name in ["BS", "RS"]:
                         true_class = "S"
+                    elif class_name in ["B0", "R0"]:
+                        true_class = "Q"
                     else:
                         continue
 
@@ -204,7 +206,7 @@ if __name__ == "__main__":
 
     # 批量预测
     print("Making predictions...")
-    predicted_classes, probabilities = classifier.predict_batch(images)
+    predicted_classes, probabilities = classifier.predict_batch(images, return_names=True)  # 添加 return_names=True
 
     # 可视化结果
     print("Creating visualization...")
@@ -226,7 +228,7 @@ if __name__ == "__main__":
         axes[i].imshow(img)
 
         # 计算预测置信度
-        pred_idx = classifier.class_names.index(pred_label)
+        pred_idx = classifier.class_names.index(pred_label)  # 现在 pred_label 是字符串
         confidence = prob[pred_idx]
 
         # 设置标题

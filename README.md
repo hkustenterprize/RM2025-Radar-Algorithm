@@ -125,7 +125,8 @@
     - *标签定义*: 0 -> 死亡状态装甲板; 1 -> 红色灯条装甲板; 2 -> 蓝色灯条装甲板
 
 3. 三阶段装甲板图案识别数据:
-    (to be released)
+    - 共计**3528**个数据
+    - *标签定义*： 首字母B/R -> 蓝色/红色（训练中会自动混合）； 第二个字符： 0 -> 前哨站； 1-5 -> 1-5号装甲板（5号不会参与训练，但是在此仍提供出来）; S（6） -> 哨兵
 
 #### Car Detector:
 - 使用Ultralytics的训练接口
@@ -141,7 +142,7 @@
 
 #### MobileNET-v2
 ```python
-python -m model.digit_classifier.train
+python -m model.digit_classifier.train --dataset-path /path/to/your/dataset --batch-size 32
 ```
 其中数据集格式要求为
 ``` shell

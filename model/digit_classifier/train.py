@@ -29,9 +29,10 @@ from model.digit_classifier.transform import (
     PadToSquareTensor,
 )
 import datetime
+import argparse
 
 
-# 新的类别映射 - 只有5类
+# 新的类别映射 - 6类（将B0和R0映射为Q）
 class_mapping = {
     # 数字1
     "B1": 0,
@@ -48,12 +49,12 @@ class_mapping = {
     # 哨兵
     "BS": 4,
     "RS": 4,
-    # 前哨站
+    # 前哨站Q（实际在B0/R0文件夹中）
     "B0": 5,
     "R0": 5,
 }
 
-class_names_new = ["1", "2", "3", "4", "S", "Q"]
+class_names_new = ["1", "2", "3", "4", "S", "Q"]  # 添加Q
 
 # 原始类别名称
 original_class_names = [
@@ -235,7 +236,7 @@ class ArmorDigitTrainer:
         self._create_datasets()
 
         # 创建模型
-        self.model = model_type(num_classes=6, pretrained=True).to(self.device)
+        self.model = model_type(num_classes=6, pretrained=True).to(self.device)  # 改为6
         self.model_name = self.model.__class__.__name__
 
         # 损失函数和优化器
@@ -319,7 +320,7 @@ class ArmorDigitTrainer:
         for i in range(6):  # 改为6
             if class_counts[i] > 0:
                 # 权重 = total_samples / (num_classes * class_count)
-                weight = total_samples / (6 * class_counts[i])  # 改为6
+                weight = total_samples / (6 * class_counts[i])
             else:
                 weight = 0.0
             class_weights.append(weight)
@@ -726,9 +727,28 @@ class ArmorDigitTrainer:
         plt.show()
 
 
+def parse_args():
+    """解析命令行参数"""
+    parser = argparse.ArgumentParser(description='Train Armor Digit Classifier')
+
+    # 数据集路径
+    parser.add_argument('--dataset-path', type=str, 
+                       default='/localdata/szhoubx/rm/data/pytorch_split',
+                       help='Path to the dataset directory containing train/ and val/ subdirs')
+
+    # 批次大小
+    parser.add_argument('--batch-size', type=int, default=32,
+                       help='Batch size for training (default: 32)')
+
+    return parser.parse_args()
+
+
 def main():
+    # 解析命令行参数
+    args = parse_args()
+
     # 数据路径
-    dataset_path = Path("/home/fallengold/extra/pure_armor_dataset/pytorch_split")
+    dataset_path = Path(args.dataset_path)
     train_dir = dataset_path / "train"
     val_dir = dataset_path / "val"
 
@@ -761,15 +781,15 @@ def main():
     trainer = ArmorDigitTrainer(
         train_dir=train_dir,
         val_dir=val_dir,
-        batch_size=32,
+        batch_size=args.batch_size,  # 使用参数
         learning_rate=0.0003,
         model_type=MobileNetClassifier,
-        workspace_root="./training_workspace",  # 指定工作区根目录
+        workspace_root="./training_workspace",
     )
 
     # 训练模型
     best_model_path = trainer.train(
-        num_epochs=100, save_best=True, visualize_every=5  # 每5个epoch可视化一次
+        num_epochs=100, save_best=True, visualize_every=5
     )
 
     # 绘制最终训练历史
