@@ -198,6 +198,9 @@ chmod +x run_scripts/*.sh
 ```
 注意：可在```config/params.yaml```文件中选择使用导入视频（```inference_video```）或者实时相机数据（```streaming_video```）
 
+![运行演示](docs/example.gif)
+*系统运行效果演示*
+
 ## 数据面板展示
 ![青工会](docs/QGH.jpg)
 *青工会展示上榜，效果拔群*
