@@ -7,6 +7,9 @@
   <img src="./docs/logo.png" width="300"/>
 </p>
 
+## 效果演示
+![运行演示](docs/example.gif)
+*系统运行效果演示*
 ## 更新日志
 - `2025.8.3`: 第一版项目代码Released🎉🎉🎉
 - `2025.8.9`: 
@@ -198,8 +201,6 @@ chmod +x run_scripts/*.sh
 ```
 注意：可在```config/params.yaml```文件中选择使用导入视频（```inference_video```）或者实时相机数据（```streaming_video```）
 
-![运行演示](docs/example.gif)
-*系统运行效果演示*
 
 ## 数据面板展示
 ![青工会](docs/QGH.jpg)
