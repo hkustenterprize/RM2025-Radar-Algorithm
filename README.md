@@ -338,7 +338,7 @@ onnx: "1.17.0"
 
 ### 软硬件层级架构图
 
-
+![软硬件层级架构图](docs/hardware-software%20struct.png)
 
 
 ## 训练指南
