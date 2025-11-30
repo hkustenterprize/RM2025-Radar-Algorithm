@@ -23,7 +23,7 @@ __pycache__
 /training_workspace
 
 # except for the following files
-!/field/RMUC2025_2.PLY
+!/field/RMUC2025_Regional.PLY
 !/field/RMUC2025_National.PLY
 !/interface/calib_tutorial.jpg
 !/docs/*.jpg

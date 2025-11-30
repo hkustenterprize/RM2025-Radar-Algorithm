@@ -55,11 +55,11 @@ transform:
   t: [[-0.68605672], [1.13893625], [15.32698638]]
   demo_img_path: "demo/demo1.jpg"
 
-
 field:
   mesh_path: "field/RMUC2025_National.PLY"       ## 全国赛场地文件
-  # mesh_path: "field/RMUC2025_Regional.PLY"     ## 区域赛场地文件
   keypoints: "transform/keypoint_6.txt"          ## 全国赛场地关键点文件
+  # 如果你要跑射线投影的demo,请务必把场地文件和关键点文件改成区域赛版本的
+  # mesh_path: "field/RMUC2025_Regional.PLY"     ## 区域赛场地文件
   # keypoints: "transform/keypoint_6_region.txt" ## 区域赛场地关键点文件
   
 referee:
